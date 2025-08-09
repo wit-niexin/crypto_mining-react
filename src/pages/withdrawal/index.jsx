@@ -18,7 +18,7 @@ import {useEffect, useState} from "react";
 // 导入APi
 import userApi from "../../api/UserApi";
 
-const User = () => {
+const Withdrawal = () => {
     const {Column} = Table;
     const [params, setParams] = useState({
         current: 1,
@@ -29,7 +29,7 @@ const User = () => {
     const [userList, setUserList] = useState([]);
     const [total, setTotal] = useState(0);
     useEffect(() => {
-        getUserList();
+        getBlogList();
     }, [params]); //监听搜索参数的变化，如果变化了，就重新获取数据
     const handleOpenUpdateModal = (row) => {
         // //将当前行的数据赋值给表单
@@ -43,10 +43,10 @@ const User = () => {
         // message.success("删除成功");
         // getBlogList();
     };
-    const getUserList = async () => {
+    const getBlogList = async () => {
         const {data} = await userApi.getUserList(params);
         setTotal(data.data.total);
-        setUserList(data.data.records);
+        setUserList(data.data);
     };
     const handlePaginationChange = (newPageNum, newPageSize) => {
         setParams({
@@ -72,7 +72,7 @@ const User = () => {
                     onChange={(e) => setParams({...params, name: e.target.value})}
                     style={{width: "200px"}}
                     allowClear
-                    placeholder="请输入矿机名称"
+                    placeholder="请输入用户姓名"
                     enterButton
                 />
             </Space>
@@ -93,30 +93,15 @@ const User = () => {
                     scroll={{y: 340}}
                 >
                     <Column title="姓名" dataIndex="legalName" key="legalName"/>
-                    <Column title="性别" dataIndex="gender" key="gender"
-                            render={(value) => (
-                                <span style={{ color: value === 0 ? '#1890ff' : '#ff4d4f', fontWeight: 'bold' }}>
-                                {value === 0 ? '男' : '女'}
-                                </span>
-                            )
-                            }
-                    />
-
+                    <Column title="性别" dataIndex="gender" key="gender"/>
                     <Column title="邮箱" dataIndex="email" key="email"/>
                     <Column title="注册时间" dataIndex="regTime" key="regTime"/>
-                    <Column title="状态" dataIndex="status" key="status"
-                            render={(value) => (
-                                <span style={{ color: value === 0 ? '#1890ff' : '#ff4d4f', fontWeight: 'bold' }}>
-                                {value === 0 ? '正常' : '禁用'}
-                                </span>
-                            )
-                            }
-                    />
+                    <Column title="状态" dataIndex="status" key="status"/>
                     <Column
                         title="操作"
-                        key="action"
-                        render={(_, record) => (
-                            <span>
+                    key="action"
+                    render={(_, record) => (
+                    <span>
           <Button
               style={{
                   backgroundColor: "orange",
@@ -144,7 +129,7 @@ const User = () => {
             </Button>
           </Popover>
         </span>
-                        )}
+                    )}
                     />
                 </Table>
             </ConfigProvider>
@@ -152,4 +137,4 @@ const User = () => {
     );
 };
 
-export default User;
+export default Withdrawal;

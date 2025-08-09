@@ -3,11 +3,8 @@ import UserApi from '../api/UserApi.js'
 import {setToken, clearToken} from "../utils/token.js"
 
 const useLoginStore = create((set) => ({
-    // token
     token: "",
-    // 用户登录
     userLogin: async (userForm) => {
-        // 发起网络请求
         const {data} = await UserApi.login(userForm);
         if (data.code === 200) {
             // 设置数据

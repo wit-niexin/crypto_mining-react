@@ -1,13 +1,11 @@
 import {Card, Button, Form, Input, message} from "antd";
 import {useNavigate} from "react-router-dom";
 import useLoginStore from "../store/useLoginStore.js";
-// 导入图片
 import zhifou from "../assets/images/zhifou.gif";
 
 const Login = () => {
     const {userLogin} = useLoginStore();
     const navigate = useNavigate();
-    // 用户登录
     const onFinish = async (loginForm) => {
         try {
             await userLogin(loginForm);

@@ -5,6 +5,7 @@ import "./index.css";
 import {
     HomeOutlined,
     ProductOutlined,
+    TransactionOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     UserOutlined,
@@ -18,7 +19,7 @@ const {Header, Sider, Content, Footer} = Layout;
 const Home = () => {
     useEffect(() => {
         const userInfo = localStorage.getItem("mining-user");
-        if (userInfo) {
+        if (!userInfo) {
             navigate("/login");
         }
     }, []);
@@ -71,6 +72,9 @@ const Home = () => {
                         </Menu.Item>
                         <Menu.Item icon={<ReadOutlined/>} key="/user_benefits">
                             <Link to="/user_benefits">用户收益</Link>
+                        </Menu.Item>
+                        <Menu.Item icon={<TransactionOutlined/>} key="/withdrawal">
+                            <Link to="/withdrawal">提现管理</Link>
                         </Menu.Item>
                         <Menu.Item icon={<UserOutlined/>} key="/user">
                             <Link to="/user">用户管理</Link>
