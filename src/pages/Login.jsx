@@ -41,7 +41,7 @@ const Login = () => {
                 >
                     <Form.Item
                         label="账号"
-                        name="username"
+                        name="name"
                         rules={[
                             {
                                 required: true,

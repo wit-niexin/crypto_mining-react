@@ -18,8 +18,8 @@ import {Outlet, Link, useLocation, useNavigate} from "react-router-dom";
 const {Header, Sider, Content, Footer} = Layout;
 const Home = () => {
     useEffect(() => {
-        const userInfo = localStorage.getItem("mining-user");
-        if (!userInfo) {
+        const user = localStorage.getItem("mining-user");
+        if (!user) {
             navigate("/login");
         }
     }, []);
@@ -27,8 +27,7 @@ const Home = () => {
     const {userLogout} = useLoginStore();
     const {pathname} = useLocation();
     const [collapsed, setCollapsed] = useState(false);
-    const [userInfo, setUserInfo] = useState(
-        JSON.parse(localStorage.getItem("mining-user"))
+    const [user] = useState(JSON.parse(localStorage.getItem("mining-user"))
     );
     const {
         token: {colorBgContainer, borderRadiusLG},
@@ -45,6 +44,7 @@ const Home = () => {
         userLogout();
         navigate("/login");
     };
+    const role = user?.roles?.[0]?.name;
     return (
         <>
             <Layout style={{height: "100%"}}>
@@ -64,6 +64,8 @@ const Home = () => {
                         defaultSelectedKeys={pathname}
                         selectedKeys={pathname}
                     >
+                        {role === 'ADMIN' && (
+                            <>
                         <Menu.Item icon={<HomeOutlined/>} key="/">
                             <Link to="/">首页</Link>
                         </Menu.Item>
@@ -79,6 +81,24 @@ const Home = () => {
                         <Menu.Item icon={<UserOutlined/>} key="/user">
                             <Link to="/user">用户管理</Link>
                         </Menu.Item>
+                            </>
+                        )}
+                        {role === 'USER' && (
+                            <>
+                                <Menu.Item icon={<HomeOutlined/>} key="/">
+                                    <Link to="/">首页</Link>
+                                </Menu.Item>
+                                <Menu.Item icon={<ProductOutlined/>} key="/myminer">
+                                    <Link to="/myminer">我的矿机</Link>
+                                </Menu.Item>
+                                <Menu.Item icon={<TransactionOutlined/>} key="/walletcenter">
+                                    <Link to="/walletcenter">钱包中心</Link>
+                                </Menu.Item>
+                                <Menu.Item icon={<ReadOutlined/>} key="/accountsettings">
+                                    <Link to="/accountsettings">账户设置</Link>
+                                </Menu.Item>
+                            </>
+                        )}
                     </Menu>
                 </Sider>
                 <Layout>
@@ -104,7 +124,7 @@ const Home = () => {
                             <Dropdown menu={{items, onClick}}>
                                 <a onClick={(e) => e.preventDefault()}>
                                     <Space>
-                                        {userInfo?.name}
+                                        {user?.legalName}
                                         <DownOutlined/>
                                     </Space>
                                 </a>

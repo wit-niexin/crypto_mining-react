@@ -6,20 +6,17 @@ const useLoginStore = create((set) => ({
     token: "",
     userLogin: async (userForm) => {
         const {data} = await UserApi.login(userForm);
-        if (data.code === 200) {
+        if (data.msg === 'success') {
             // 设置数据
-            localStorage.setItem("mining-user", JSON.stringify(data.data.userInfo))
+            localStorage.setItem("mining-user", JSON.stringify(data.data.user))
             // 设置token
             setToken(data.data.token)
         } else {
-            // 抛出异常
-            throw new Error(data.message)
+            throw new Error(data.data)
         }
     },
-    // 退出登录
     userLogout: () => {
         clearToken();
-        // 清除用户信息
         localStorage.removeItem("mining-user")
     }
 }));

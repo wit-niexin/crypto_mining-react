@@ -1,4 +1,3 @@
-// 提供三个函数，设置token  获取token  清除token
 const KEY = 'mining-token'
 
 const setToken = (token) => {
