@@ -1,13 +1,12 @@
-// App.jsx
 import React from 'react';
-import { ConfigProvider } from 'antd';
+import {ConfigProvider} from 'antd';
 import zhCN from 'antd/locale/zh_CN';
-import { RouterProvider } from 'react-router-dom';
+import {RouterProvider} from 'react-router-dom';
 import router from './router';
 
 const App = () => (
     <ConfigProvider locale={zhCN}>
-      <RouterProvider router={router} />
+        <RouterProvider router={router}/>
     </ConfigProvider>
 );
 

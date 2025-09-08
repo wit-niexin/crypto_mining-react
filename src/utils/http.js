@@ -54,5 +54,5 @@ export default {
     post,
     get,
     put,
-    del,
+    del
 };

@@ -2,7 +2,7 @@ import axios from 'axios'
 import {getToken} from "./token.js"
 
 const instance = axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: 'http://47.111.117.108:8080',
     timeout: 5000
 })
 // 添加请求拦截器
