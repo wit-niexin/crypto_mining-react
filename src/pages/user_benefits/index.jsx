@@ -127,7 +127,7 @@ const UserBenefits = () => {
         // 博客总数
         setTotal(data.data.total);
         // 博客列表数据
-        setUserBenefitsList(data.data);
+        setUserBenefitsList(data.data.records);
     };
     // 切换每页页码、跳转页码
     const handlePaginationChange = (newPageNum, newPageSize) => {

@@ -1,7 +1,7 @@
 import http from "../utils/http";
 // 博客分页信息
 const getUserBenefitsList = (data) => {
-    return http.get("/user_benefits/getAll", data);
+    return http.get("/user_benefit/getAllPage", data);
 };
 // 保存博客
 const saveUserBenefits = (data) => {

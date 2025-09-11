@@ -16,7 +16,7 @@ import zhCN from "antd/locale/zh_CN";
 import {useEffect, useState} from "react";
 
 // 导入APi
-import userApi from "../../api/UserApi";
+import userApi from "../../api/WithdrawlApi";
 
 const Withdrawal = () => {
     const {Column} = Table;
@@ -44,9 +44,9 @@ const Withdrawal = () => {
         // getBlogList();
     };
     const getBlogList = async () => {
-        const {data} = await userApi.getUserList(params);
+        const {data} = await userApi.getWithdrawalList(params);
         setTotal(data.data.total);
-        setUserList(data.data);
+        setUserList(data.data.records);
     };
     const handlePaginationChange = (newPageNum, newPageSize) => {
         setParams({
@@ -92,11 +92,13 @@ const Withdrawal = () => {
                     dataSource={userList}
                     scroll={{y: 340}}
                 >
-                    <Column title="姓名" dataIndex="legalName" key="legalName"/>
-                    <Column title="性别" dataIndex="gender" key="gender"/>
-                    <Column title="邮箱" dataIndex="email" key="email"/>
-                    <Column title="注册时间" dataIndex="regTime" key="regTime"/>
-                    <Column title="状态" dataIndex="status" key="status"/>
+                    <Column title="姓名" dataIndex="userName" key="userName"/>
+                    <Column title="提现金额" dataIndex="money" key="money"/>
+                    <Column title="手续费" dataIndex="handlingFee" key="handlingFee"/>
+                    <Column title="提现地址" dataIndex="address" key="address"/>
+                    <Column title="申请时间" dataIndex="applicationTime" key="applicationTime"/>
+                    <Column title="审批时间" dataIndex="approvalTime" key="approvalTime"/>
+                    <Column title="审批人" dataIndex="approver" key="approver"/>
                     <Column
                         title="操作"
                     key="action"

@@ -32,9 +32,16 @@ const MiningRig = () => {
         getBlogList();
     }, [params]); //监听搜索参数的变化，如果变化了，就重新获取数据
     const getBlogList = async () => {
+        console.log('请求参数：', params);
         const {data} = await userApi.getMiningRigList(params);
-        setTotal(data.data.total);
-        setBlogList(data.data);
+        console.log('后端返回的完整数据：', data);
+        if(data.code===200){
+            setTotal(data.data.total);
+            setBlogList(data.data.records);
+        }else{
+            console.log('接口返回异常：', data);
+        }
+        
     };
     const handlePaginationChange = (newPageNum, newPageSize) => {
         setParams({
